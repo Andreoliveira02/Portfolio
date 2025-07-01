@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link 
+    rel="stylesheet" 
+    href="SRC/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" 
+    rel="stylesheet">
+  <title>Portfólio</title>
+</head>
+
+<body>
+  <header>
+    <div class="nav-container">
+      <h1><a href="#">André Oliveira</a></h1>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <nav>
+        <a href="#">Sobre</a>
+        <a href="#">Projetos</a>
+        <a href="#">Contato</a>
+      </nav>
+
+      <div class="social-icons">
+        <a href="https://www.youtube.com/c/Andr%C3%A9Oliveira_Arts" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/artsoliveira_" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/andré-cardoso-profissional" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-text left">
+        <h2>Designer</h2>
+        <p>Designer Gráfico <br>UI/UX</p>
+      </div>
+
+      <div class="hero-image" id="tilt-container">
+        <img src="SRC/IMG/Teste.png" alt="Metade Designer" class="half designer">
+        <img src="SRC/IMG/Coder.png" alt="Metade Coder" class="half coder">
+      </div>
+
+      <div class="hero-text right">
+        <h2>&lt;Front-end&gt;</h2>
+        <p>Web Developer<br>HTML • CSS</p>
+      </div>
+    </section>
+
+    <section class="intro-section">
+      <p>Transformando ideias</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Rodapé</p>
+  </footer>
+
+  <script>
+    // Menu responsivo
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('header nav');
+    const socialIcons = document.querySelector('.social-icons');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      socialIcons.classList.toggle('active');
+    });
+
+    const heroSection = document.querySelector('.hero-section');
+    const tiltContainer = document.getElementById('tilt-container');
+    const designerImg = document.querySelector('.hero-image .designer');
+
+    function handleMove(clientX) {
+      const bounds = tiltContainer.getBoundingClientRect();
+      const centerX = bounds.left + bounds.width / 2;
+      const minX = bounds.left;
+      const maxX = bounds.right;
+
+      // Recorte da imagem "designer"
+      let widthPercent;
+      if (clientX <= minX) {
+        widthPercent = 100;
+      } else if (clientX >= maxX) {
+        widthPercent = 0;
+      } else {
+        const percent = (clientX - minX) / (maxX - minX);
+        widthPercent = 100 - percent * 100;
+      }
+
+      widthPercent = Math.min(100, Math.max(0, widthPercent));
+      designerImg.style.clipPath = `polygon(0 0, ${widthPercent}% 0, ${widthPercent}% 100%, 0 100%)`;
+
+      // Movimento lateral (somente eixo X)
+      const moveX = ((clientX - centerX) / (bounds.width / 2)) * 15; // ajuste a intensidade aqui
+      tiltContainer.style.transform = `translateX(${moveX}px)`;
+    }
+
+    // Eventos
+    heroSection.addEventListener('mousemove', (e) => {
+      handleMove(e.clientX);
+    });
+
+    heroSection.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      handleMove(touch.clientX);
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      designerImg.style.clipPath = 'polygon(0 0, 42% 0, 42% 100%, 0 100%)';
+      tiltContainer.style.transform = 'translateX(0)';
+    });
+
+    heroSection.addEventListener('touchend', () => {
+      designerImg.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+      tiltContainer.style.transform = 'translateX(0)';
+    });
+  </script>
+</body>
+
+</html>
