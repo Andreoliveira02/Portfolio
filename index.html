@@ -4,18 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link 
-    rel="stylesheet" 
-    href="SRC/style.css">
+  <meta name="description" content="Portfólio de André Oliveira, designer e desenvolvedor" />
+  <meta name="author" content="André Oliveira" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="SRC/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" 
-    rel="stylesheet">
-  <title>Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+
+  <title>Portfólio | André Oliveira</title>
 </head>
 
 <body>
@@ -46,27 +47,111 @@
   <main>
     <section class="hero-section">
       <div class="hero-text left">
-        <h2>Designer</h2>
+        <h2 class="pulse">Designer</h2>
         <p>Designer Gráfico <br>UI/UX</p>
       </div>
 
       <div class="hero-image" id="tilt-container">
-        <img src="SRC/IMG/Teste.png" alt="Metade Designer" class="half designer">
-        <img src="SRC/IMG/Coder.png" alt="Metade Coder" class="half coder">
+        <img src="SRC/IMG/Teste.png" alt="Metade Designer" class="half designer" />
+        <img src="SRC/IMG/Coder.png" alt="Metade Coder" class="half coder" />
       </div>
 
       <div class="hero-text right">
-        <h2>&lt;Front-end&gt;</h2>
-        <p>Web Developer<br>HTML • CSS</p>
+        <h2 class="pulse">&lt;DEV/&gt;</h2>
+        <p>Front-End<br />HTML • CSS</p>
       </div>
     </section>
 
     <section class="intro-section">
-      <p>Transformando ideias</p>
+      <h2>
+        Sou designer gráfico e desenvolvedor front-end, criando identidades visuais e interfaces funcionais.
+      </h2>
+
+      <h3>
+        <span>O</span><span> </span><span>Q</span><span>U</span><span>E</span><span> </span><span>U</span><span>S</span><span>O</span><span> </span><span>N</span><span>O</span><span> </span><span>D</span><span>I</span><span>A</span><span>A</span><span>D</span><span>I</span><span>A</span><span> </span><span>:</span>
+      </h3>
+
+      <div class="intro-icons">
+        <div class="icon-wrapper">
+          <i class="devicon-photoshop-plain" title="Photoshop"></i>
+          <span class="icons-label">Photoshop</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+          <span class="icons-label">illustrator</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
+          <span class="icons-label">InDesign</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
+          <span class="icons-label">Corel Draw</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <i class="fab fa-figma" title="Figma"></i>
+          <span class="icons-label">FIGMA</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <i class="fab fa-html5" title="HTML"></i>
+          <span class="icons-label">HTML</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <i class="fab fa-css3-alt" title="CSS"></i>
+          <span class="icons-label">CSS</span>
+        </div>
+
+        <div class="icon-wrapper">
+          <iconify-icon icon="bi:javascript" title="JavaScript"></iconify-icon>
+          <span class="icons-label">JavaScript</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <h2>Projetos</h2>
+
+      <div class="project-item">
+        <canvas class="light-effect-canvas"></canvas>
+        <div class="card"></div>
+        <div class="card-text">
+          <h3>Projeto 01</h3>
+          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <canvas class="light-effect-canvas"></canvas>
+        <div class="card"></div>
+        <div class="card-text">
+          <h3>Projeto 02</h3>
+          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <canvas class="light-effect-canvas"></canvas>
+        <div class="card"></div>
+        <div class="card-text">
+          <h3>Projeto 03</h3>
+          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
+    <div class="footer-arrow">
+      <a href="#top" class="circle-button" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+    </div>
     <p>Rodapé</p>
   </footer>
 
@@ -81,6 +166,7 @@
       socialIcons.classList.toggle('active');
     });
 
+    // Efeito tilt e recorte imagem designer (sem mudanças)
     const heroSection = document.querySelector('.hero-section');
     const tiltContainer = document.getElementById('tilt-container');
     const designerImg = document.querySelector('.hero-image .designer');
@@ -91,7 +177,6 @@
       const minX = bounds.left;
       const maxX = bounds.right;
 
-      // Recorte da imagem "designer"
       let widthPercent;
       if (clientX <= minX) {
         widthPercent = 100;
@@ -105,12 +190,10 @@
       widthPercent = Math.min(100, Math.max(0, widthPercent));
       designerImg.style.clipPath = `polygon(0 0, ${widthPercent}% 0, ${widthPercent}% 100%, 0 100%)`;
 
-      // Movimento lateral (somente eixo X)
-      const moveX = ((clientX - centerX) / (bounds.width / 2)) * 15; // ajuste a intensidade aqui
+      const moveX = ((clientX - centerX) / (bounds.width / 2)) * 15;
       tiltContainer.style.transform = `translateX(${moveX}px)`;
     }
 
-    // Eventos
     heroSection.addEventListener('mousemove', (e) => {
       handleMove(e.clientX);
     });
@@ -128,6 +211,80 @@
     heroSection.addEventListener('touchend', () => {
       designerImg.style.clipPath = 'polygon(0 0, 42% 0, 42% 100%, 0 100%)';
       tiltContainer.style.transform = 'translateX(0)';
+    });
+
+    // Efeito de luz no canvas dentro dos projetos
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.project-item').forEach(item => {
+        const canvas = item.querySelector('.light-effect-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let mouse = { x: -999, y: -999 };
+
+        function resize() {
+          width = item.clientWidth;
+          height = item.clientHeight;
+          canvas.width = width;
+          canvas.height = height;
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        item.addEventListener('mousemove', e => {
+          const rect = item.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+
+        item.addEventListener('mouseleave', () => {
+          mouse.x = -999;
+          mouse.y = -999;
+        });
+
+        function animate() {
+          ctx.clearRect(0, 0, width, height);
+
+          // Luz suave circular onde o mouse está
+          const light = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 450);
+          light.addColorStop(0, 'rgba(255, 189, 65, 0.2)');
+          light.addColorStop(1, 'rgba(255, 189, 65, 0)');
+          ctx.fillStyle = light;
+          ctx.fillRect(0, 0, width, height);
+
+          // Bordas brilhantes - intensidade conforme distância do mouse da borda
+          const edgeThreshold = 80;
+          let intensity = 0;
+
+          const distLeft = mouse.x;
+          const distRight = width - mouse.x;
+          const distTop = mouse.y;
+          const distBottom = height - mouse.y;
+
+          intensity = Math.max(
+            (edgeThreshold - distLeft) / edgeThreshold,
+            (edgeThreshold - distRight) / edgeThreshold,
+            (edgeThreshold - distTop) / edgeThreshold,
+            (edgeThreshold - distBottom) / edgeThreshold,
+            0
+          );
+
+          if (intensity > 0 && mouse.x >= 0 && mouse.x <= width && mouse.y >= 0 && mouse.y <= height) {
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = `rgba(255, 189, 65, ${intensity * 0.5})`;
+            ctx.shadowColor = `rgba(255, 189, 65, ${intensity})`;
+            ctx.shadowBlur = 20;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.strokeRect(3, 3, width - 6, height - 6);
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      });
     });
   </script>
 </body>
