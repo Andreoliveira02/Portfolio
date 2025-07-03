@@ -47,6 +47,12 @@ body::before {
     opacity: 0.1;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #c7d0d8 !important;
+  }
+}
 /* #endregion */
 
 /* #region HEADER*/
