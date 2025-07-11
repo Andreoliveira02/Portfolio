@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light" />
   <meta name="description" content="Portfólio de André Oliveira, designer e desenvolvedor" />
   <meta name="author" content="André Oliveira" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,58 +17,119 @@
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 
   <title>Portfólio | André Oliveira</title>
+
+  <script defer>
+window.onload = () => {
+  const projectSlides = {
+    P1: ["/SRC/IMG/P1.jpg", "/SRC/IMG/P1-2.jpg", "/SRC/IMG/P1-3.jpg", "/SRC/IMG/P1-4.jpg"],
+    P2: ["/SRC/IMG/P2.jpg", "/SRC/IMG/P2-2.jpg", "/SRC/IMG/P2-3.jpg", "/SRC/IMG/P2-4.jpg", "/SRC/IMG/P2-5.jpg"],
+    P3: ["/SRC/IMG/P3.jpg", "/SRC/IMG/P3-2.jpg", "/SRC/IMG/P3-3.jpg", "/SRC/IMG/P3-4.jpg"],
+  };
+
+  const intervals = new Map();
+
+  window.startSlideshow = function (card) {
+    const mainImg = card.querySelector('.img-main');
+    const nextImg = card.querySelector('.img-next');
+    const id = card.dataset.id;
+    const images = projectSlides[id];
+    if (!images || images.length === 0) return;
+
+    let index = 0;
+
+    const interval = setInterval(() => {
+  index = (index + 1) % images.length;
+  nextImg.src = images[index];
+  nextImg.style.opacity = 1;
+
+  setTimeout(() => {
+    mainImg.src = nextImg.src;
+    nextImg.style.opacity = 0;
+  }, 1500); // delay do fade aumentado para 700ms
+}, 1800); // intervalo aumentado para 2.5s para imagem ficar um pouco mais tempo
+
+    intervals.set(card, interval);
+  };
+
+  window.stopSlideshow = function (card) {
+    const mainImg = card.querySelector('.img-main');
+    const nextImg = card.querySelector('.img-next');
+    const id = card.dataset.id;
+    const interval = intervals.get(card);
+
+    if (interval) {
+      clearInterval(interval);
+      intervals.delete(card);
+    }
+
+    // Restaura a imagem original
+    if (projectSlides[id] && projectSlides[id][0]) {
+      mainImg.src = projectSlides[id][0];
+      nextImg.style.opacity = 0;
+    }
+  };
+};
+</script>
+
 </head>
 
 <body>
-  <header>
+  <header id="topo">
     <div class="nav-container">
-      <h1><a href="#">André Oliveira</a></h1>
+      <h1><a href="#" onclick="location.reload(); return false;">André Oliveira</a></h1>
       <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
       <nav class="start-nav">
-        <a href="#">Sobre</a>
-        <a href="#">Projetos</a>
-        <a href="#">Contato</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
       </nav>
 
       <div class="social-icons">
-        <a href="https://www.youtube.com/c/Andr%C3%A9Oliveira_Arts" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://www.instagram.com/artsoliveira_" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
         <a href="https://www.linkedin.com/in/andré-cardoso-profissional" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
+          <i class="fab fa-linkedin"></i></a>
+
+        <a href="https://www.behance.net/andreprofissional" target="_blank">
+          <i class="fab fa-behance"></i></a>
+
+        <a href="https://www.youtube.com/c/Andr%C3%A9Oliveira_Arts" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-youtube"></i></a>
+
+        
+ 
       </div>
     </div>
   </header>
 
   <main>
-    <section class="hero-section">
+    <section class="hero-section" id="sobre">
       <div class="hero-text left">
+        <div class="slide-wrapper">
         <h2 class="pulse">Designer</h2>
+        </div>
         <p>Designer Gráfico <br>UI/UX</p>
       </div>
 
       <div class="hero-image" id="tilt-container">
-        <img src="SRC/IMG/Teste.png" alt="Metade Designer" class="half designer" />
-        <img src="SRC/IMG/Coder.png" alt="Metade Coder" class="half coder" />
+        <img src="SRC/IMG/perfil-d.png" alt="Metade Designer" class="half designer" />
+        <img src="SRC/IMG/perfil-c.png" alt="Metade Coder" class="half coder" />
       </div>
 
       <div class="hero-text right">
+        <div class="slide-wrapper">
         <h2 class="pulse">&lt;DEV/&gt;</h2>
+        </div>
         <p>Front-End<br />HTML • CSS</p>
       </div>
     </section>
 
-    <section class="intro-section">
+    <section class="intro-section" >
       <h2>
-        Sou designer gráfico e desenvolvedor front-end, criando identidades visuais e interfaces funcionais.
+        Formado em Análise e Desenvolvimento de Sistemas e Técnico em Design Gráfico, atuo integrando design visual e habilidades técnicas para criar interfaces funcionais e experiências intuitivas, com foco em UI/UX, front-end e web design.
       </h2>
 
       <h3>
-        <span>O </span><span></span><span> Q</span><span>U</span><span>E</span><span> </span>
+        <span>O</span><span> </span>
+        <span> Q</span><span>U</span><span>E</span><span> </span>
         <span>U</span><span>S</span><span>O</span><span> </span>
         <span>N</span><span>O</span>
         <span> </span><span>D</span><span>I</span><span>A</span>
@@ -120,57 +180,116 @@
       </div>
     </section>
 
-    <section class="project-section">
+    <section class="project-section" id="projetos">
       <h2>
-        <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>
-        
-      </h>
+        <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>   
+      </h2>
 
       <div class="project-item">
-        <div class="card"></div>
+
+        <div class="card" data-id="P1" 
+          onmouseenter="startSlideshow(this)" 
+          onmouseleave="stopSlideshow(this)">
+          <img class="img-main slide-img" src="/SRC/IMG/P1.jpg" alt="Projeto 01">        <img class="img-next" src="" alt="Imagem 2">
+        <div class="legend">Mantenha o mouse sobre a imagem</div>
+        </div>
+
         <div class="card-text">
-          <h3>Projeto 01</h3>
-          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+          <h3>NickMark</h3>
+            <h4>Branding UI/UX</h4>
+             <p>NickMark é uma marca fictícia de UI/UX Design que traz uma identidade visual moderna e criativa, 
+             com logo, cores, tipografia e manual de uso para garantir consistência e personalidade.</p>
+            <div class="bt-behance"><p id="bt-p">
+            <a href="https://www.behance.net/gallery/229832519/NickMark-Branding-para-marca-de-UIUX-Design" target="_blank">
+          Ver completo no Behance</a> </p></div>
         </div>
       </div>
 
-      <div class="project-item">
-        <div class="card"></div>
+         <div class="project-item">
+
+          <div class="card" data-id="P2" 
+          onmouseenter="startSlideshow(this)" 
+          onmouseleave="stopSlideshow(this)">
+          <img class="img-main slide-img" src="/SRC/IMG/P2.jpg" alt="Projeto 02">        <img class="img-next" src="" alt="Imagem 2">
+        <div class="legend">Mantenha o mouse sobre a imagem</div>
+        </div>
+
         <div class="card-text">
-          <h3>Projeto 02</h3>
-          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+          <h3>Design Editorial</h3>
+            <h4>Revista One Piece</h4>
+             <p>Revista criada no Adobe InDesign que explora o universo de One Piece com artes autorais e conteúdo original, usando referências da obra e design editorial para um material visual atrativo.</p>
+            <div class="bt-behance"><p id="bt-p">
+            <a href="https://www.behance.net/gallery/229650049/Design-Editorial-Revista-One-Piece-no-Adobe-InDesign?tracking_source=project_owner_other_projects" target="_blank">
+          Ver completo no Behance</a> </p></div>
         </div>
       </div>
 
-      <div class="project-item">
-        <div class="card"></div>
+         <div class="project-item">
+
+       <div class="card" data-id="P3" 
+          onmouseenter="startSlideshow(this)" 
+          onmouseleave="stopSlideshow(this)">
+          <img class="img-main slide-img" src="/SRC/IMG/P3.jpg" alt="Projeto 03">        <img class="img-next" src="" alt="Imagem 2">
+        <div class="legend">Mantenha o mouse sobre a imagem</div>
+        </div>
+
         <div class="card-text">
-          <h3>Projeto 03</h3>
-          <p>Descrição do projeto. Texto explicativo ou chamada.</p>
+          <h3>YouTube Channel</h3>
+            <h4>Desenhos Fanmade</h4>
+             <p>
+              Canal com ilustrações manuais e digitais focadas em personagens de animes e cultura pop. Mostra speed drawings, processos criativos e evolução artística, compartilhando técnicas para inspirar outros fãs da arte.             </p>
+            <div class="bt-behance"><p id="bt-p">
+            <a href="https://www.behance.net/gallery/229911421/Youtube-Channel-Drawing-fanmade" target="_blank">
+          Ver completo no Behance</a> </p></div>
         </div>
       </div>
     </section>
-  </main>
-   
+  
+    <section class="contact-section" id="contato">
+  <h2>
+    <span>C</span></span><span>O</span><span>N</span><span>T</span><span>A</span><span>T</span><span>O</span>
+  </h2>
+
+  <div class="contact-container">
+    <div class="contact-info"></div>
+
+    
+    <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeokygwb" method="post">
+      <input type="text" name="nome" placeholder="Seu nome" required />
+      <input type="email" name="email" placeholder="Seu e-mail" required />
+      <textarea name="mensagem" rows="4" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+      <div id="successMessage" style="display:none;">Mensagem enviada com sucesso!</div>
+    </form>
+    
+
+  </div>
+    </section>
+    </main>
+
   <footer>
  <div class="footer-arrow">
-      <a href="#top" class="circle-button" aria-label="Voltar ao topo">
+      <a href="#topo" class="circle-button" aria-label="Voltar ao topo">
         <i class="fas fa-chevron-up"></i>
       </a>
     </div>
 
 <div class="footer-content">
-    <p><a href="#">©2025 André Oliveira</a></p>
+    <p><a href="#" onclick="location.reload(); return false;">©2025 André Oliveira</a></p>
     <nav class="footer-links">
-      <a href="#">Sobre</a>
-      <a href="#">Projetos</a>
-      <a href="#">Contato</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
   
     </nav>
   </div>
+ 
+
   </footer>
-  
-  <script>
+
+</body>
+
+ <script>
     // Menu responsivo
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('header nav');
@@ -224,12 +343,46 @@
     });
 
     heroSection.addEventListener('touchend', () => {
+
       designerImg.style.clipPath = 'polygon(0 0, 42% 0, 42% 100%, 0 100%)';
       tiltContainer.style.transform = 'translateX(0)';
     });
 
-    
+    document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // impede envio tradicional
+
+    const data = new FormData(form);
+    const action = form.action;
+
+    try {
+      const response = await fetch(action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (response.ok) {
+        successMessage.style.display = 'block';
+        form.reset();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); // recarrega após 2 segundos
+      } else {
+        alert('Erro ao enviar a mensagem, tente novamente mais tarde.');
+      }
+    } catch (error) {
+      alert('Erro ao enviar a mensagem, tente novamente mais tarde.');
+    }
+  });
+});
+
+
+
   </script>
-</body>
 
 </html>
