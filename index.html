@@ -26,9 +26,13 @@ window.onload = () => {
     P3: ["SRC/IMG/P3.jpg", "SRC/IMG/P3-2.jpg", "SRC/IMG/P3-3.jpg", "SRC/IMG/P3-4.jpg"],
   };
 
-  const intervals = new Map();
+  // Agora armazenamos {intervalId, timeoutId} por projectItem
+  const timers = new Map();
 
-  window.startSlideshow = function (card) {
+  window.startSlideshow = function (projectItem) {
+    if (timers.has(projectItem)) return; // já rodando
+
+    const card = projectItem.querySelector('.card');
     const mainImg = card.querySelector('.img-main');
     const nextImg = card.querySelector('.img-next');
     const id = card.dataset.id;
@@ -37,68 +41,96 @@ window.onload = () => {
 
     let index = 0;
 
-    const interval = setInterval(() => {
-  index = (index + 1) % images.length;
-  nextImg.src = images[index];
-  nextImg.style.opacity = 1;
+    const intervalId = setInterval(() => {
+      index = (index + 1) % images.length;
+      nextImg.src = images[index];
+      nextImg.style.opacity = 1;
 
-  setTimeout(() => {
-    mainImg.src = nextImg.src;
-    nextImg.style.opacity = 0;
-  }, 1500); // delay do fade aumentado para 700ms
-}, 1800); // intervalo aumentado para 2.5s para imagem ficar um pouco mais tempo
+      // Limpar timeout anterior se existir
+      const prevTimeout = timers.get(projectItem)?.timeoutId;
+      if (prevTimeout) clearTimeout(prevTimeout);
 
-    intervals.set(card, interval);
+      const timeoutId = setTimeout(() => {
+        mainImg.src = nextImg.src;
+        nextImg.style.opacity = 0;
+      }, 1500);
+
+      // Atualiza timeoutId no Map
+      timers.set(projectItem, { intervalId, timeoutId });
+    }, 1800);
+
+    timers.set(projectItem, { intervalId, timeoutId: null });
   };
 
-  window.stopSlideshow = function (card) {
+  window.stopSlideshow = function (projectItem) {
+    const timerObj = timers.get(projectItem);
+    if (!timerObj) return;
+
+    clearInterval(timerObj.intervalId);
+    if (timerObj.timeoutId) clearTimeout(timerObj.timeoutId);
+
+    timers.delete(projectItem);
+
+    const card = projectItem.querySelector('.card');
     const mainImg = card.querySelector('.img-main');
     const nextImg = card.querySelector('.img-next');
     const id = card.dataset.id;
-    const interval = intervals.get(card);
 
-    if (interval) {
-      clearInterval(interval);
-      intervals.delete(card);
-    }
-
-    // Restaura a imagem original
     if (projectSlides[id] && projectSlides[id][0]) {
       mainImg.src = projectSlides[id][0];
       nextImg.style.opacity = 0;
     }
   };
+
+  // Adiciona os event listeners aos project-items (pode estar no window.onload ou no DOMContentLoaded)
+  document.querySelectorAll('.project-item').forEach((projectItem) => {
+    projectItem.addEventListener('mouseenter', () => startSlideshow(projectItem));
+    projectItem.addEventListener('mouseleave', () => stopSlideshow(projectItem));
+  });
 };
+
 </script>
 
 </head>
 
 <body>
-  <header id="topo">
-    <div class="nav-container">
-      <h1><a href="#" onclick="location.reload(); return false;">André Oliveira</a></h1>
-      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
-      <nav class="start-nav">
-        <a href="#sobre">Sobre</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#contato">Contato</a>
-      </nav>
+<header id="topo">
+  <div class="nav-container">
+    <a class="andre" href="#">André Oliveira</a>
+
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="start-nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
+      <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <nav class="mobile-menu">
+    <a href="#sobre">Sobre</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
 
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/andré-cardoso-profissional" target="_blank">
-          <i class="fab fa-linkedin"></i></a>
-
-        <a href="https://www.behance.net/andreprofissional" target="_blank">
-          <i class="fab fa-behance"></i></a>
-
-        <a href="https://www.youtube.com/c/Andr%C3%A9Oliveira_Arts" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-youtube"></i></a>
-
-        
- 
-      </div>
+      <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
+      <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
-  </header>
+  </nav>
+
+  <div class="overlay"></div>
+</header>
 
   <main>
     <section class="hero-section" id="sobre">
@@ -136,47 +168,42 @@ window.onload = () => {
         <span>A</span>
         <span>D</span><span>I</span><span>A</span><span> </span><span>:</span>
       </h3>
-
+      <div class="intro-scroll-container">
       <div class="intro-icons">
-        <div class="icon-wrapper">
-          <i class="devicon-photoshop-plain" title="Photoshop"></i>
-          <span class="icons-label">Photoshop</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
-          <span class="icons-label">illustrator</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
-          <span class="icons-label">InDesign</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
-          <span class="icons-label">Corel Draw</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <i class="fab fa-figma" title="Figma"></i>
-          <span class="icons-label">FIGMA</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <i class="fab fa-html5" title="HTML"></i>
-          <span class="icons-label">HTML</span>
-        </div>
-
-        <div class="icon-wrapper">
-          <i class="fab fa-css3-alt" title="CSS"></i>
-          <span class="icons-label">CSS</span>
-        </div>
-
-        <div class="icon-wrapper">
+            <div class="icon-wrapper">
+              <i class="devicon-photoshop-plain" title="Photoshop"></i>
+              <span class="icons-label">Photoshop</span>
+            </div>
+            <div class="icon-wrapper">
+              <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+              <span class="icons-label">illustrator</span>
+            </div>
+            <div class="icon-wrapper">
+              <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
+              <span class="icons-label">InDesign</span>
+            </div>
+            <div class="icon-wrapper">
+              <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
+              <span class="icons-label">Corel Draw</span>
+            </div>
+            <div class="icon-wrapper">
+              <i class="fab fa-figma" title="Figma"></i>
+              <span class="icons-label">FIGMA</span>
+            </div>
+            <div class="icon-wrapper">
+              <i class="fab fa-html5" title="HTML"></i>
+              <span class="icons-label">HTML</span>
+            </div>
+            <div class="icon-wrapper">
+              <i class="fab fa-css3-alt" title="CSS"></i>
+              <span class="icons-label">CSS</span>
+            </div>
+            <div class="icon-wrapper">
           <iconify-icon icon="bi:javascript" title="JavaScript"></iconify-icon>
           <span class="icons-label">JavaScript</span>
+
         </div>
+      </div>
       </div>
     </section>
 
@@ -185,13 +212,11 @@ window.onload = () => {
         <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>   
       </h2>
 
-      <div class="project-item">
-
-        <div class="card" data-id="P1" 
-          onmouseenter="startSlideshow(this)" 
-          onmouseleave="stopSlideshow(this)">
+      <div class="project-item"
+      onmouseenter="startSlideshow(this)" 
+      onmouseleave="stopSlideshow(this)">
+        <div class="card" data-id="P1" >
           <img class="img-main slide-img" src="SRC/IMG/P1.jpg" alt="Projeto 01">        <img class="img-next" src="" alt="Imagem 2">
-        <div class="legend">Mantenha o mouse sobre a imagem</div>
         </div>
 
         <div class="card-text">
@@ -205,13 +230,11 @@ window.onload = () => {
         </div>
       </div>
 
-         <div class="project-item">
-
-          <div class="card" data-id="P2" 
-          onmouseenter="startSlideshow(this)" 
-          onmouseleave="stopSlideshow(this)">
+         <div class="project-item"
+        onmouseenter="startSlideshow(this)" 
+        onmouseleave="stopSlideshow(this)">
+          <div class="card" data-id="P2">
           <img class="img-main slide-img" src="SRC/IMG/P2.jpg" alt="Projeto 02">        <img class="img-next" src="" alt="Imagem 2">
-        <div class="legend">Mantenha o mouse sobre a imagem</div>
         </div>
 
         <div class="card-text">
@@ -224,13 +247,11 @@ window.onload = () => {
         </div>
       </div>
 
-         <div class="project-item">
-
-       <div class="card" data-id="P3" 
-          onmouseenter="startSlideshow(this)" 
-          onmouseleave="stopSlideshow(this)">
+         <div class="project-item"
+        onmouseenter="startSlideshow(this)" 
+        onmouseleave="stopSlideshow(this)">
+          <div class="card" data-id="P3">
           <img class="img-main slide-img" src="SRC/IMG/P3.jpg" alt="Projeto 03">        <img class="img-next" src="" alt="Imagem 2">
-        <div class="legend">Mantenha o mouse sobre a imagem</div>
         </div>
 
         <div class="card-text">
@@ -290,15 +311,36 @@ window.onload = () => {
 </body>
 
  <script>
-    // Menu responsivo
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('header nav');
-    const socialIcons = document.querySelector('.social-icons');
+ const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const overlay = document.querySelector('.overlay');
 
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      socialIcons.classList.toggle('active');
-    });
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  overlay.classList.toggle('active');
+
+  const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', !isExpanded);
+});
+
+overlay.addEventListener('click', () => {
+  menuToggle.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  overlay.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+});
+
+const menuLinks = mobileMenu.querySelectorAll('a, .social-icons *');
+
+menuLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
 
     // Efeito tilt e recorte imagem designer (sem mudanças)
     const heroSection = document.querySelector('.hero-section');
@@ -381,6 +423,26 @@ window.onload = () => {
   });
 });
 
+ const scrollContainer = document.querySelector('.intro-scroll-container');
+  const iconTrack = document.querySelector('.intro-icons');
+
+  let isPaused = false;
+
+  // Pausa a animação ao tocar/clicar no container
+  scrollContainer.addEventListener('pointerdown', () => {
+    iconTrack.classList.add('paused');
+    isPaused = true;
+  });
+
+  // Retoma a animação ao tocar/clicar fora do container
+  document.addEventListener('pointerdown', (e) => {
+    if (isPaused && !scrollContainer.contains(e.target)) {
+      iconTrack.classList.remove('paused');
+      isPaused = false;
+    }
+  });
+
+  
 
 
   </script>
