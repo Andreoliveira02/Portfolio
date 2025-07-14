@@ -198,8 +198,8 @@ header {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   background: none;
   border: none;
   cursor: pointer;
@@ -207,8 +207,8 @@ header {
 }
 
 .menu-toggle .bar {
-  height: 4px;
-  width: 30px;
+  height: clamp(2.5px, 1vw, 4px);
+  width: clamp(20px, 1vw, 30px);
   background: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
@@ -946,6 +946,10 @@ footer {
     font-size: clamp(8px, 1vw, 9px);
   }
 
+  .andre  {
+    font-size: 4rem;
+  }
+  
   .menu-toggle {
     display: flex;
   }
@@ -954,7 +958,6 @@ footer {
   .social-icons {
     display: none;
   }
-
 
   header {
     position: relative;
