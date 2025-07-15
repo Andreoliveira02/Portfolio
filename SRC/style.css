@@ -209,7 +209,7 @@ header {
 .menu-toggle .bar {
   height: clamp(2.5px, 1vw, 4px);
   width: clamp(20px, 1vw, 30px);
-  background: #fff;
+  background: #c7d0d8;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -479,7 +479,13 @@ main {
 }
 
   /* Ícones (FA, Devicon, Iconify) */
-.icon-wrapper i,
+.icon-wrapper i {
+    font-size: 4rem;
+    color: #c7d0d8;
+    filter: grayscale(20%);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
 .icon-wrapper iconify-icon {
     font-size: 4rem;
     color: #c7d0d8;
@@ -614,7 +620,7 @@ main {
 }
 
 .project-item p {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1.3rem, 2vw, 1.5rem);
   margin: 0;
   margin-bottom: 0.5rem;
   width: 100%;
@@ -719,6 +725,28 @@ justify-content: center;
 .img-next {
   opacity: 0;
   z-index: 2;
+}
+
+.tech-icons {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  display: flex;
+  gap: 0.8rem;
+  z-index: 3;
+  background-color: rgba(199, 208, 216, 0.7);
+  padding: 0.5rem;
+  border-radius: 0.7rem;
+  border: #ffcc08 1px solid;
+}
+
+.tech-icons i, .tech-icons iconify-icon {
+  font-size: 2.4rem;
+  color: #001f49; /* ou branco, dependendo do fundo */
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: default;
+  opacity: 1;
 }
 /* #endregion */
 
@@ -1158,7 +1186,7 @@ footer {
         padding: 0;
       }
       .intro-section h2 {
-          font-size: 2rem;
+          font-size: 2.4rem;
           margin-top: 1rem;
           margin-bottom: 1rem;
           max-width: 100%;
@@ -1182,12 +1210,17 @@ footer {
         scroll-padding-right: 4rem;
         scrollbar-width: none;
         -ms-overflow-style: none;
+          position: relative;
+        animation: bounceSide 3s ease-in-out infinite;
       }
 
+      @keyframes bounceSide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+}
       .intro-scroll-container::-webkit-scrollbar {
         display: none; /* Chrome, Safari e Opera */
       }
-
 
       .intro-icons {
         display: flex;
@@ -1228,6 +1261,11 @@ footer {
       .icons-label  {
         white-space: nowrap;
       }
+
+
+
+      
+      
           /* #Project */
       .project-item {
         padding: 0;
@@ -1288,8 +1326,9 @@ footer {
       }
 
       .project-item p {
-        font-size: clamp(1.8rem, 2vw, 2rem);
+        font-size: clamp(1.7rem, 2vw, 2rem);
         line-height: 2;
+       
       }
 
       .bt-behance {
@@ -1324,6 +1363,19 @@ footer {
 .footer-content {
   gap: clamp(1rem, 2vw, 1.5rem);
 }
+
+.circle-button {
+  width: clamp(8rem, 8vw, 10rem);
+  height: clamp(8rem, 8vw, 10rem);
+  color: #c7d0d8;
+  font-size: clamp(4rem, 2vw, 5rem);
+}
+
+.footer-content a {
+  font-size: clamp(1.rem, 1.5vw, 2rem);
+};
+
+
       }
 
 @media (max-width: 414px) { 

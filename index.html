@@ -17,7 +17,7 @@
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 
   <title>Portfólio | André Oliveira</title>
-
+  <link rel="icon" type="image/png" sizes="512x512" href="/SRC/IMG/icon3.png" />
   <script defer>
 window.onload = () => {
   const projectSlides = {
@@ -96,7 +96,7 @@ window.onload = () => {
 <body>
 <header id="topo">
   <div class="nav-container">
-    <a class="andre" href="#">André Oliveira</a>
+    <a class="andre" href="#" onclick="location.reload(); return false;">André Oliveira</a>
 
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
       <span class="bar"></span>
@@ -168,6 +168,7 @@ window.onload = () => {
         <span>A</span>
         <span>D</span><span>I</span><span>A</span><span> </span><span>:</span>
       </h3>
+      
       <div class="intro-scroll-container">
       <div class="intro-icons">
             <div class="icon-wrapper">
@@ -205,6 +206,7 @@ window.onload = () => {
         </div>
       </div>
       </div>
+    
     </section>
 
     <section class="project-section" id="projetos">
@@ -216,7 +218,14 @@ window.onload = () => {
       onmouseenter="startSlideshow(this)" 
       onmouseleave="stopSlideshow(this)">
         <div class="card" data-id="P1" >
-          <img class="img-main slide-img" src="SRC/IMG/P1.jpg" alt="Projeto 01">        <img class="img-next" src="" alt="Imagem 2">
+          <img class="img-main slide-img" src="SRC/IMG/P1.jpg" alt="Projeto 01"> 
+          <img class="img-next" src="" alt="Imagem 2">
+          
+           <div class="tech-icons">
+           <i class="devicon-photoshop-plain" title="Photoshop"></i>
+            <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+           <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
+          </div>
         </div>
 
         <div class="card-text">
@@ -234,7 +243,15 @@ window.onload = () => {
         onmouseenter="startSlideshow(this)" 
         onmouseleave="stopSlideshow(this)">
           <div class="card" data-id="P2">
-          <img class="img-main slide-img" src="SRC/IMG/P2.jpg" alt="Projeto 02">        <img class="img-next" src="" alt="Imagem 2">
+          <img class="img-main slide-img" src="SRC/IMG/P2.jpg" alt="Projeto 02">
+          <img class="img-next" src="" alt="Imagem 2">
+
+           <div class="tech-icons">
+            <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
+            <i class="devicon-photoshop-plain" title="Photoshop"></i>
+            <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+
+          </div>
         </div>
 
         <div class="card-text">
@@ -251,7 +268,13 @@ window.onload = () => {
         onmouseenter="startSlideshow(this)" 
         onmouseleave="stopSlideshow(this)">
           <div class="card" data-id="P3">
-          <img class="img-main slide-img" src="SRC/IMG/P3.jpg" alt="Projeto 03">        <img class="img-next" src="" alt="Imagem 2">
+          <img class="img-main slide-img" src="SRC/IMG/P3.jpg" alt="Projeto 03">
+          <img class="img-next" src="" alt="Imagem 2">
+
+            <div class="tech-icons">
+              <i class="fab fa-youtube"></i>
+          </div>
+
         </div>
 
         <div class="card-text">
