@@ -2,370 +2,361 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfólio de André Oliveira, designer e desenvolvedor" />
-  <meta name="author" content="André Oliveira" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="SRC/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet" />
-  <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Portifolio do andre oliveira, designer e desenvolvedor"/>
+    <meta name="author" content="andre oliveira"/>
+    <meta http-equiv="X-UA-compatible" content="IE=edge"/>
+        <link rel="stylesheet" href="/SRC/styles.css"/>
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link rel="icon" type="image/png" href="/SRC/IMG/icon3.png"/>
+        <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <title>Portfólio | André Oliveira</title>
 
-  <title>Portfólio | André Oliveira</title>
-  <link rel="icon" type="image/png" sizes="512x512" href="/SRC/IMG/icon3.png" />
-  <script defer>
-window.onload = () => {
-  const projectSlides = {
-    P1: ["SRC/IMG/P1.jpg", "SRC/IMG/P1-2.jpg", "SRC/IMG/P1-3.jpg", "SRC/IMG/P1-4.jpg"],
-    P2: ["SRC/IMG/P2.jpg", "SRC/IMG/P2-2.jpg", "SRC/IMG/P2-3.jpg", "SRC/IMG/P2-4.jpg", "SRC/IMG/P2-5.jpg"],
-    P3: ["SRC/IMG/P3.jpg", "SRC/IMG/P3-2.jpg", "SRC/IMG/P3-3.jpg", "SRC/IMG/P3-4.jpg"],
-  };
+    <script defer>
+        window.onload = () => {
+            const projectSlides = {
+                P1: ["SRC/IMG/P1.jpg", "SRC/IMG/P1-2.jpg", "SRC/IMG/P1-3.jpg", "SRC/IMG/P1-4.jpg"],
+                P2: ["SRC/IMG/P2.jpg", "SRC/IMG/P2-2.jpg", "SRC/IMG/P2-3.jpg", "SRC/IMG/P2-4.jpg", "SRC/IMG/P2-5.jpg"],
+                P3: ["SRC/IMG/P3.jpg", "SRC/IMG/P3-2.jpg", "SRC/IMG/P3-3.jpg", "SRC/IMG/P3-4.jpg"],  
+            };
 
-  // Agora armazenamos {intervalId, timeoutId} por projectItem
-  const timers = new Map();
+            const timers = new Map();
+        
+            window.startSlideshow = function (projectItem) {
+                if (timers.has(projectItem)) return;
 
-  window.startSlideshow = function (projectItem) {
-    if (timers.has(projectItem)) return; // já rodando
+                    const card = projectItem.querySelector('.card');
+                    const mainImg = card.querySelector('.img-main');
+                    const nextImg = card.querySelector('.img-next');
+                    const id = card.dataset.id;
+                    const images = projectSlides[id];
 
-    const card = projectItem.querySelector('.card');
-    const mainImg = card.querySelector('.img-main');
-    const nextImg = card.querySelector('.img-next');
-    const id = card.dataset.id;
-    const images = projectSlides[id];
-    if (!images || images.length === 0) return;
+                if (!images || images.length === 0) return;
 
-    let index = 0;
+                    let index = 0;
 
-    const intervalId = setInterval(() => {
-      index = (index + 1) % images.length;
-      nextImg.src = images[index];
-      nextImg.style.opacity = 1;
+                    const intervalId = setInterval(() => {
+                    index = (index + 1) % images.length;
+                    nextImg.src = images[index];
+                    nextImg.style.opacity = 1;
 
-      // Limpar timeout anterior se existir
-      const prevTimeout = timers.get(projectItem)?.timeoutId;
-      if (prevTimeout) clearTimeout(prevTimeout);
+                    const prevTimeout = timers.get(projectItem)?.timeoutId;
+                
+                if (prevTimeout) clearTimeout(prevTimeout);
 
-      const timeoutId = setTimeout(() => {
-        mainImg.src = nextImg.src;
-        nextImg.style.opacity = 0;
-      }, 1500);
+                    const timeoutId = setTimeout(() => {
+                    mainImg.src = nextImg.src;
+                    nextImg.style.opacity = 0;
+                    }, 1500);
 
-      // Atualiza timeoutId no Map
-      timers.set(projectItem, { intervalId, timeoutId });
-    }, 1800);
+                    timers.set(projectItem, { intervalId, timeoutId });
+                    }, 1800);
 
-    timers.set(projectItem, { intervalId, timeoutId: null });
-  };
+                    timers.set(projectItem, { intervalId, timeoutId: null });
+                    };
 
-  window.stopSlideshow = function (projectItem) {
-    const timerObj = timers.get(projectItem);
-    if (!timerObj) return;
+            window.stopSlideshow = function (projectItem) {
+                const timerObj = timers.get(projectItem);
+                if (!timerObj) return;
 
-    clearInterval(timerObj.intervalId);
-    if (timerObj.timeoutId) clearTimeout(timerObj.timeoutId);
+                clearInterval(timerObj.intervalId);
+                if (timerObj.timeoutId) clearTimeout(timerObj.timeoutId);
 
-    timers.delete(projectItem);
+                timers.delete(projectItem);
 
-    const card = projectItem.querySelector('.card');
-    const mainImg = card.querySelector('.img-main');
-    const nextImg = card.querySelector('.img-next');
-    const id = card.dataset.id;
+                const card = projectItem.querySelector('.card');
+                const mainImg = card.querySelector('.img-main');
+                const nextImg = card.querySelector('.img-next');
+                const id = card.dataset.id;
 
-    if (projectSlides[id] && projectSlides[id][0]) {
-      mainImg.src = projectSlides[id][0];
-      nextImg.style.opacity = 0;
-    }
-  };
+                if (projectSlides[id] && projectSlides[id][0]) {
+                mainImg.src = projectSlides[id][0];
+                nextImg.style.opacity = 0;
+                }
+            };
 
-  // Adiciona os event listeners aos project-items (pode estar no window.onload ou no DOMContentLoaded)
-  document.querySelectorAll('.project-item').forEach((projectItem) => {
-    projectItem.addEventListener('mouseenter', () => startSlideshow(projectItem));
-    projectItem.addEventListener('mouseleave', () => stopSlideshow(projectItem));
-  });
-};
-
-</script>
-
+            document.querySelectorAll('.project-item').forEach((projectItem) => {
+                projectItem.addEventListener('mouseenter', () => startSlideshow(projectItem));
+                projectItem.addEventListener('mouseleave', () => stopSlideshow(projectItem));
+            });
+        }
+    </script>
 </head>
 
 <body>
-<header id="topo">
-  <div class="nav-container">
-    <a class="andre" href="#" onclick="location.reload(); return false;">André Oliveira</a>
+    <header id="topo">
+        <div class="nav-container">
+            <a class="andre" href="#" onclick="location.reload(); return false;">André Oliveira</a>
 
-    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+            <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
 
-    <nav class="start-nav">
-      <a href="#sobre">Sobre</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#contato">Contato</a>
-    </nav>
+            <nav class="start-nav">
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#contato">Contato</a>   
+            </nav>
 
-    <div class="social-icons">
-      <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
-      <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-  </div>
-
-  <nav class="mobile-menu">
-    <a href="#sobre">Sobre</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#contato">Contato</a>
-
-      <div class="social-icons">
-      <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
-      <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-  </nav>
-
-  <div class="overlay"></div>
-</header>
-
-  <main>
-    <section class="hero-section" id="sobre">
-      <div class="hero-text left">
-        <div class="slide-wrapper">
-        <h2 class="pulse">Designer</h2>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
+                <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
-        <p>Designer Gráfico <br>UI/UX</p>
-      </div>
 
-      <div class="hero-image" id="tilt-container">
-        <img src="SRC/IMG/perfil-d.png" alt="Metade Designer" class="half designer" />
-        <img src="SRC/IMG/perfil-c.png" alt="Metade Coder" class="half coder" />
-      </div>
+        <nav class="mobile-menu">
+            <a href="#sobre">Sobre</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#contato">Contato</a>
 
-      <div class="hero-text right">
-        <div class="slide-wrapper">
-        <h2 class="pulse">&lt;DEV/&gt;</h2>
-        </div>
-        <p>Front-End<br />HTML • CSS</p>
-      </div>
-    </section>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/andr%C3%A9-cardoso-profissional/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.behance.net/andreprofissional" target="_blank"><i class="fab fa-behance"></i></a>
+                <a href="https://www.youtube.com/channel/UCg0nMcpjFzyVJ1xzCWeV3Wg" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </nav>
 
-    <section class="intro-section" >
-      <h2>
-        Formado em Análise e Desenvolvimento de Sistemas e Técnico em Design Gráfico, atuo integrando design visual e habilidades técnicas para criar interfaces funcionais e experiências intuitivas, com foco em UI/UX, front-end e web design.
-      </h2>
+        <div class="overlay"></div>
+    </header>
 
-      <h3>
-        <span>O</span><span> </span>
-        <span> Q</span><span>U</span><span>E</span><span> </span>
-        <span>U</span><span>S</span><span>O</span><span> </span>
-        <span>N</span><span>O</span>
-        <span> </span><span>D</span><span>I</span><span>A</span>
-        <span>A</span>
-        <span>D</span><span>I</span><span>A</span><span> </span><span>:</span>
-      </h3>
+    <main> 
+        <section class="hero-section" id="sobre">
+            <div class="hero-text left">
+                <div class="slide-wrapper">
+                    <h2 class="pulse">Designer</h2>
+                </div>
+                <p>Designer Gráfico <br>UI/UX</p>
+            </div>
+
+            <div class="hero-image" id="tilt-container">
+                <img src="SRC/IMG/perfil-d.png" alt="Metade Designer" class="half designer" />
+                <img src="SRC/IMG/perfil-c.png" alt="Metade Coder" class="half coder" />
+             </div>
+
+             <div class="hero-text right">
+                <div class="slide-wrapper">
+                    <h2 class="pulse">&lt;DEV/&gt;</h2>
+                </div>
+                <p>Front-End<br />HTML • CSS</p>
+            </div>
+        </section>
+
+        <section class="intro-section" >
+            <h2>
+                Formado em Análise e Desenvolvimento de Sistemas e Técnico em Design Gráfico, 
+                atuo integrando design visual e habilidades técnicas para criar interfaces funcionais e 
+                experiências intuitivas, com foco em UI/UX, front-end e web design.
+            </h2>
+
+            <h3>
+                <span>O</span><span> </span>
+                <span> Q</span><span>U</span><span>E</span><span> </span>
+                <span>U</span><span>S</span><span>O</span><span> </span>
+                <span>N</span><span>O</span>
+                <span> </span><span>D</span><span>I</span><span>A</span>
+                <span>A</span>
+                <span>D</span><span>I</span><span>A</span><span> </span><span>:</span>
+            </h3>
       
-      <div class="intro-scroll-container">
-      <div class="intro-icons">
-            <div class="icon-wrapper">
-              <i class="devicon-photoshop-plain" title="Photoshop"></i>
-              <span class="icons-label">Photoshop</span>
+            <div class="intro-scroll-container">
+                <div class="intro-icons">
+
+                    <div class="icon-wrapper">
+                        <i class="devicon-photoshop-plain" title="Photoshop"></i>
+                        <span class="icons-label">Photoshop</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+                        <span class="icons-label">illustrator</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
+                        <span class="icons-label">InDesign</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
+                        <span class="icons-label">Corel Draw</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <i class="fab fa-figma" title="Figma"></i>
+                        <span class="icons-label">FIGMA</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <i class="fab fa-html5" title="HTML"></i>
+                        <span class="icons-label">HTML</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <i class="fab fa-css3-alt" title="CSS"></i>
+                        <span class="icons-label">CSS</span>
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <iconify-icon icon="bi:javascript" title="JavaScript"></iconify-icon>
+                        <span class="icons-label">JavaScript</span>
+                    </div>
+                </div>
             </div>
-            <div class="icon-wrapper">
-              <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
-              <span class="icons-label">illustrator</span>
+        </section>
+
+        <section class="project-section" id="projetos">
+            <h2><span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>   
+            </h2>
+
+            <div class="project-item"
+                onmouseenter="startSlideshow(this)" 
+                onmouseleave="stopSlideshow(this)">
+                
+                <div class="card" data-id="P1" >
+                    <img class="img-main slide-img" src="SRC/IMG/P1.jpg" alt="Projeto 01"> 
+                    <img class="img-next" src="" alt="Imagem 2">
+                
+                    <div class="tech-icons">
+                        <i class="devicon-photoshop-plain" title="Photoshop"></i>
+                        <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+                        <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
+                    </div>
+                </div>
+
+                <div class="card-text">
+                    <h3>NickMark</h3>
+                    <h4>Branding UI/UX</h4>
+                    <p>NickMark é uma marca fictícia de UI/UX Design que traz uma identidade visual moderna e criativa, 
+                    com logo, cores, tipografia e manual de uso para garantir consistência e personalidade.</p>
+                    <div class="bt-behance"><p id="bt-p">
+                        <a href="https://www.behance.net/gallery/229832519/NickMark-Branding-para-marca-de-UIUX-Design" target="_blank">Ver completo no Behance</a> </p>
+                    </div>
+                </div>
             </div>
-            <div class="icon-wrapper">
-              <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
-              <span class="icons-label">InDesign</span>
+
+            <div class="project-item"
+                onmouseenter="startSlideshow(this)" 
+                onmouseleave="stopSlideshow(this)">
+                <div class="card" data-id="P2">
+                    <img class="img-main slide-img" src="SRC/IMG/P2.jpg" alt="Projeto 02">
+                    <img class="img-next" src="" alt="Imagem 2">
+
+                    <div class="tech-icons">
+                        <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
+                        <i class="devicon-photoshop-plain" title="Photoshop"></i>
+                        <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
+                     </div>
+                </div>
+
+                <div class="card-text">
+                    <h3>Design Editorial</h3>
+                    <h4>Revista One Piece</h4>
+                    <p>Revista criada no Adobe InDesign que explora o universo de One Piece com artes autorais e conteúdo original, 
+                    usando referências da obra e design editorial para um material visual atrativo.</p>
+                    <div class="bt-behance"><p id="bt-p">
+                    <a href="https://www.behance.net/gallery/229650049/Design-Editorial-Revista-One-Piece-no-Adobe-InDesign?tracking_source=project_owner_other_projects" target="_blank">Ver completo no Behance</a> </p></div>
+                </div>
             </div>
-            <div class="icon-wrapper">
-              <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
-              <span class="icons-label">Corel Draw</span>
+
+            <div class="project-item"
+                onmouseenter="startSlideshow(this)" 
+                onmouseleave="stopSlideshow(this)">
+                <div class="card" data-id="P3">
+                    <img class="img-main slide-img" src="SRC/IMG/P3.jpg" alt="Projeto 03">
+                    <img class="img-next" src="" alt="Imagem 2">
+
+                    <div class="tech-icons">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+
+                <div class="card-text">
+                    <h3>YouTube Channel</h3>
+                    <h4>Desenhos Fanmade</h4>
+                    <p>Canal com ilustrações manuais e digitais focadas em personagens de animes e cultura pop. Mostra speed drawings, 
+                    processos criativos e evolução artística, compartilhando técnicas para inspirar outros fãs da arte.</p>
+                    <div class="bt-behance"><p id="bt-p">
+                    <a href="https://www.behance.net/gallery/229911421/Youtube-Channel-Drawing-fanmade" target="_blank">Ver completo no Behance</a> </p></div>
+                </div>
             </div>
-            <div class="icon-wrapper">
-              <i class="fab fa-figma" title="Figma"></i>
-              <span class="icons-label">FIGMA</span>
+        </section>
+
+        <section class="contact-section" id="contato">
+            <h2>
+                <span>C</span></span><span>O</span><span>N</span><span>T</span><span>A</span><span>T</span><span>O</span>
+            </h2>
+
+            <div class="contact-container">
+                <div class="contact-info"></div>
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeokygwb" method="post">
+                    <input type="text" name="nome" placeholder="Seu nome" required />
+                    <input type="email" name="email" placeholder="Seu e-mail" required />
+                    <textarea name="mensagem" rows="4" placeholder="Sua mensagem" required></textarea>
+                    <button type="submit">Enviar</button>
+                    <div id="successMessage" style="display:none;">Mensagem enviada com sucesso!</div>
+                </form>
             </div>
-            <div class="icon-wrapper">
-              <i class="fab fa-html5" title="HTML"></i>
-              <span class="icons-label">HTML</span>
-            </div>
-            <div class="icon-wrapper">
-              <i class="fab fa-css3-alt" title="CSS"></i>
-              <span class="icons-label">CSS</span>
-            </div>
-            <div class="icon-wrapper">
-          <iconify-icon icon="bi:javascript" title="JavaScript"></iconify-icon>
-          <span class="icons-label">JavaScript</span>
-
-        </div>
-      </div>
-      </div>
-    
-    </section>
-
-    <section class="project-section" id="projetos">
-      <h2>
-        <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>   
-      </h2>
-
-      <div class="project-item"
-      onmouseenter="startSlideshow(this)" 
-      onmouseleave="stopSlideshow(this)">
-        <div class="card" data-id="P1" >
-          <img class="img-main slide-img" src="SRC/IMG/P1.jpg" alt="Projeto 01"> 
-          <img class="img-next" src="" alt="Imagem 2">
-          
-           <div class="tech-icons">
-           <i class="devicon-photoshop-plain" title="Photoshop"></i>
-            <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
-           <iconify-icon icon="simple-icons:coreldraw" title="CorelDRAW"></iconify-icon>
-          </div>
-        </div>
-
-        <div class="card-text">
-          <h3>NickMark</h3>
-            <h4>Branding UI/UX</h4>
-             <p>NickMark é uma marca fictícia de UI/UX Design que traz uma identidade visual moderna e criativa, 
-             com logo, cores, tipografia e manual de uso para garantir consistência e personalidade.</p>
-            <div class="bt-behance"><p id="bt-p">
-            <a href="https://www.behance.net/gallery/229832519/NickMark-Branding-para-marca-de-UIUX-Design" target="_blank">
-          Ver completo no Behance</a> </p></div>
-        </div>
-      </div>
-
-         <div class="project-item"
-        onmouseenter="startSlideshow(this)" 
-        onmouseleave="stopSlideshow(this)">
-          <div class="card" data-id="P2">
-          <img class="img-main slide-img" src="SRC/IMG/P2.jpg" alt="Projeto 02">
-          <img class="img-next" src="" alt="Imagem 2">
-
-           <div class="tech-icons">
-            <iconify-icon icon="streamline-logos:adobe-indesign-logo-block" title="InDesign"></iconify-icon>
-            <i class="devicon-photoshop-plain" title="Photoshop"></i>
-            <iconify-icon icon="devicon-plain:illustrator" title="Illustrator"></iconify-icon>
-
-          </div>
-        </div>
-
-        <div class="card-text">
-          <h3>Design Editorial</h3>
-            <h4>Revista One Piece</h4>
-             <p>Revista criada no Adobe InDesign que explora o universo de One Piece com artes autorais e conteúdo original, usando referências da obra e design editorial para um material visual atrativo.</p>
-            <div class="bt-behance"><p id="bt-p">
-            <a href="https://www.behance.net/gallery/229650049/Design-Editorial-Revista-One-Piece-no-Adobe-InDesign?tracking_source=project_owner_other_projects" target="_blank">
-          Ver completo no Behance</a> </p></div>
-        </div>
-      </div>
-
-         <div class="project-item"
-        onmouseenter="startSlideshow(this)" 
-        onmouseleave="stopSlideshow(this)">
-          <div class="card" data-id="P3">
-          <img class="img-main slide-img" src="SRC/IMG/P3.jpg" alt="Projeto 03">
-          <img class="img-next" src="" alt="Imagem 2">
-
-            <div class="tech-icons">
-              <i class="fab fa-youtube"></i>
-          </div>
-
-        </div>
-
-        <div class="card-text">
-          <h3>YouTube Channel</h3>
-            <h4>Desenhos Fanmade</h4>
-             <p>
-              Canal com ilustrações manuais e digitais focadas em personagens de animes e cultura pop. Mostra speed drawings, processos criativos e evolução artística, compartilhando técnicas para inspirar outros fãs da arte.             </p>
-            <div class="bt-behance"><p id="bt-p">
-            <a href="https://www.behance.net/gallery/229911421/Youtube-Channel-Drawing-fanmade" target="_blank">
-          Ver completo no Behance</a> </p></div>
-        </div>
-      </div>
-    </section>
-  
-    <section class="contact-section" id="contato">
-  <h2>
-    <span>C</span></span><span>O</span><span>N</span><span>T</span><span>A</span><span>T</span><span>O</span>
-  </h2>
-
-  <div class="contact-container">
-    <div class="contact-info"></div>
-
-    
-    <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeokygwb" method="post">
-      <input type="text" name="nome" placeholder="Seu nome" required />
-      <input type="email" name="email" placeholder="Seu e-mail" required />
-      <textarea name="mensagem" rows="4" placeholder="Sua mensagem" required></textarea>
-      <button type="submit">Enviar</button>
-      <div id="successMessage" style="display:none;">Mensagem enviada com sucesso!</div>
-    </form>
-    
-
-  </div>
-    </section>
+        </section>
     </main>
 
-  <footer>
- <div class="footer-arrow">
-      <a href="#topo" class="circle-button" aria-label="Voltar ao topo">
-        <i class="fas fa-chevron-up"></i>
-      </a>
-    </div>
+    <footer>
+        <div class="footer-arrow">
+            <a href="#topo" class="circle-button" aria-label="Voltar ao topo">
+            <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
 
-<div class="footer-content">
-    <p><a href="#" onclick="location.reload(); return false;">©2025 André Oliveira</a></p>
-    <nav class="footer-links">
-      <a href="#sobre">Sobre</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#contato">Contato</a>
-  
-    </nav>
-  </div>
- 
-
-  </footer>
-
+        <div class="footer-content">
+            <p><a href="#" onclick="location.reload(); return false;">©2025 André Oliveira</a></p>
+            <nav class="footer-links">
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 
- <script>
- const menuToggle = document.querySelector('.menu-toggle');
-const mobileMenu = document.querySelector('.mobile-menu');
-const overlay = document.querySelector('.overlay');
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.overlay');
 
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  overlay.classList.toggle('active');
+    menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
 
-  const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-  menuToggle.setAttribute('aria-expanded', !isExpanded);
-});
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    });
 
-overlay.addEventListener('click', () => {
-  menuToggle.classList.remove('active');
-  mobileMenu.classList.remove('active');
-  overlay.classList.remove('active');
-  menuToggle.setAttribute('aria-expanded', 'false');
-});
-
-const menuLinks = mobileMenu.querySelectorAll('a, .social-icons *');
-
-menuLinks.forEach(link => {
-  link.addEventListener('click', () => {
+    overlay.addEventListener('click', () => {
     menuToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
     overlay.classList.remove('active');
     menuToggle.setAttribute('aria-expanded', 'false');
-  });
-});
+    });
 
-    // Efeito tilt e recorte imagem designer (sem mudanças)
+    const menuLinks = mobileMenu.querySelectorAll('a, .social-icons *');
+
+    menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+    });
+
     const heroSection = document.querySelector('.hero-section');
     const tiltContainer = document.getElementById('tilt-container');
     const designerImg = document.querySelector('.hero-image .designer');
@@ -414,11 +405,11 @@ menuLinks.forEach(link => {
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contactForm');
-  const successMessage = document.getElementById('successMessage');
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // impede envio tradicional
+    form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
     const data = new FormData(form);
     const action = form.action;
@@ -436,7 +427,7 @@ menuLinks.forEach(link => {
 
         setTimeout(() => {
           window.location.reload();
-        }, 2000); // recarrega após 2 segundos
+        }, 2000);
       } else {
         alert('Erro ao enviar a mensagem, tente novamente mais tarde.');
       }
@@ -446,28 +437,21 @@ menuLinks.forEach(link => {
   });
 });
 
- const scrollContainer = document.querySelector('.intro-scroll-container');
-  const iconTrack = document.querySelector('.intro-icons');
+    const scrollContainer = document.querySelector('.intro-scroll-container');
+    const iconTrack = document.querySelector('.intro-icons');
 
-  let isPaused = false;
+    let isPaused = false;
 
-  // Pausa a animação ao tocar/clicar no container
-  scrollContainer.addEventListener('pointerdown', () => {
-    iconTrack.classList.add('paused');
-    isPaused = true;
-  });
+    scrollContainer.addEventListener('pointerdown', () => {
+        iconTrack.classList.add('paused');
+        isPaused = true;
+    });
 
-  // Retoma a animação ao tocar/clicar fora do container
-  document.addEventListener('pointerdown', (e) => {
-    if (isPaused && !scrollContainer.contains(e.target)) {
-      iconTrack.classList.remove('paused');
-      isPaused = false;
-    }
-  });
-
-  
-
-
+    document.addEventListener('pointerdown', (e) => {
+        if (isPaused && !scrollContainer.contains(e.target)) {
+        iconTrack.classList.remove('paused');
+        isPaused = false;
+        }ico
+    });
   </script>
-
 </html>
