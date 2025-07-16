@@ -5,10 +5,13 @@
     box-sizing: border-box;
     /* border: 1px solid red; */
 }
+html {
+    height: 100%;
+}
 
 html,
 body {
-    height: 100%;
+    min-height: 100%;
     min-width: 320px;
     margin: 0;
     padding: 0;
@@ -1016,7 +1019,7 @@ footer {
     }
 
     header {
-        padding: 2px;
+        padding: auto 0.5rem;
         text-align: center;
         height: 8rem;
     }
@@ -1351,5 +1354,4 @@ footer {
     }
 }
 /* #endregion */
-
 

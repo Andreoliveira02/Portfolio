@@ -10,9 +10,9 @@
         <link rel="stylesheet" href="SRC/styles.css"/>
         <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap"/>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap"/>
         <link rel="icon" type="image/png" href="SRC/IMG/icon3.png"/>
         <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <title>Portfólio | André Oliveira</title>
@@ -289,7 +289,7 @@
             </div>
         </section>
 
-        <section class="contact-section" id="contato">
+        <section class="contact-section" id="contato" >
             <h2>
                 <span>C</span></span><span>O</span><span>N</span><span>T</span><span>A</span><span>T</span><span>O</span>
             </h2>
@@ -326,6 +326,7 @@
 </body>
 
 <script>
+
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     const overlay = document.querySelector('.overlay');
@@ -356,6 +357,7 @@
         menuToggle.setAttribute('aria-expanded', 'false');
     });
     });
+
 
     const heroSection = document.querySelector('.hero-section');
     const tiltContainer = document.getElementById('tilt-container');
@@ -433,9 +435,9 @@
       }
     } catch (error) {
       alert('Erro ao enviar a mensagem, tente novamente mais tarde.');
-    }
-  });
-});
+        }
+     });
+    });
 
     const scrollContainer = document.querySelector('.intro-scroll-container');
     const iconTrack = document.querySelector('.intro-icons');
@@ -451,7 +453,7 @@
         if (isPaused && !scrollContainer.contains(e.target)) {
         iconTrack.classList.remove('paused');
         isPaused = false;
-        }ico
+        }
     });
   </script>
 </html>
