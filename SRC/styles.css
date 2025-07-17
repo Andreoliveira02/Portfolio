@@ -629,6 +629,62 @@ main {
     transform: translateX(100%);
 }
 
+.bt-behancefull {
+    display: flex;
+    position: relative;
+    width: 50%;
+    height: 5rem;
+    margin: 4rem auto;
+    background-color: #ffcc08;
+    justify-content: center;
+    align-self: flex-start;
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bt-behancefull::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%; 
+    height: 300%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.bt-behancefull:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255, 189, 89, 1);
+}
+
+.bt-behancefull:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+#bt-full {
+    display: flex;
+    margin: auto;
+    color: #001f49;
+    justify-content: center;
+    font-size: clamp(1.8rem, 1.5vw, 2.4rem);
+}
+
+#bt-full a {
+    color: #001f49;
+    text-decoration: none;
+    font-weight: 800;
+    transition: color 0.3s;
+    font-size: 3rem;
+}
+
+#bt-full a:hover {
+    color: #001f49dd;
+    text-decoration: none;
+}
+
 #bt-p {
     display: flex;
     margin: auto;
@@ -648,6 +704,7 @@ main {
     color: #001f49dd;
     text-decoration: none;
 }
+
 
 .project-item .card {
     position: relative;
@@ -1285,6 +1342,15 @@ footer {
         background-color: #ffcc08; 
     }
 
+    #bt-full a {
+    font-size: 2.5rem;
+    }
+
+    .bt-behancefull {
+    width: 90%;
+    height: 5.5rem;
+    }
+
     #bt-p {
         font-size: clamp(2rem, 1vw, 2.5rem);
     }
@@ -1354,4 +1420,3 @@ footer {
     }
 }
 /* #endregion */
-
