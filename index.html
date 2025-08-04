@@ -20,6 +20,7 @@
     <script defer>
         window.onload = () => {
             const projectSlides = {
+                P0: ["SRC/IMG/P0.PNG", "SRC/IMG/P0-2.PNG", "SRC/IMG/P0-3.PNG", "SRC/IMG/P0-4.PNG"],
                 P1: ["SRC/IMG/P1.jpg", "SRC/IMG/P1-2.jpg", "SRC/IMG/P1-3.jpg", "SRC/IMG/P1-4.jpg"],
                 P2: ["SRC/IMG/P2.jpg", "SRC/IMG/P2-2.jpg", "SRC/IMG/P2-3.jpg", "SRC/IMG/P2-4.jpg", "SRC/IMG/P2-5.jpg"],
                 P3: ["SRC/IMG/P3.jpg", "SRC/IMG/P3-2.jpg", "SRC/IMG/P3-3.jpg", "SRC/IMG/P3-4.jpg"],  
@@ -224,6 +225,39 @@
         <section class="project-section" id="projetos">
             <h2><span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span>   
             </h2>
+
+
+
+            <div class="project-item"
+                onmouseenter="startSlideshow(this)" 
+                onmouseleave="stopSlideshow(this)">
+                
+                <div class="card" data-id="P0" >
+                    <img class="img-main slide-img" src="SRC/IMG/P0.PNG" alt="Projeto 00"> 
+                    <img class="img-next" src="" alt="Imagem 2">
+                
+                    <div class="tech-icons">
+                        <i class="fab fa-figma" title="Figma"></i>
+                        <i class="devicon-photoshop-plain" title="Photoshop"></i>
+                    </div>
+                </div>
+
+                <div class="card-text">
+                    <h3>PLANK – App (UI/UX)</h3>
+                    <h4>Personalização de Carros</h4>
+                    <p>Um aplicativo focado em personalização automotiva. Simule, crie e visualize modificações no seu carro em tempo real. 
+                        Com fórum, sugestões inteligentes e integração com oficinas.
+                    <div class="bt-behance"><p id="bt-p">
+                        <a href="https://www.behance.net/gallery/231843673/PLANK-Customizacao-Automotiva-em-Tempo-Real" target="_blank">Ver completo no Behance</a> </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
 
             <div class="project-item"
                 onmouseenter="startSlideshow(this)" 
