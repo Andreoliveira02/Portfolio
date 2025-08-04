@@ -527,6 +527,7 @@ main {
     align-items: center;
     transition: all 0.5s ease;
     z-index: 1;
+     max-width: 1500px;
 }
 
 .project-item::before {
