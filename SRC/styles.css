@@ -1318,7 +1318,7 @@ footer {
     }
           
     .project-item h3 {
-        font-size: clamp(4rem, 2vw, 4.5rem);
+        font-size: clamp(3rem, 2vw, 3.5rem);
     }
 
     .project-item h4 {
@@ -1421,3 +1421,4 @@ footer {
     }
 }
 /* #endregion */
+
